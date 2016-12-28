@@ -4,7 +4,7 @@
 describe("String Class Extra Methods", () => {
   it("Should return True if the string contains vowels", () => {
     expect('Testing'.hasVowels()).toEqual(true);
-    expect('tsting'.hasVowels()).toEqual(false);
+    expect('tstng'.hasVowels()).toEqual(false);
   });
 
   // toUpper (typeof String): Returns the String in question but with all characters in upper cases as applicable. This method should be implemented without the use of the toUpperCase internal methods.
@@ -21,13 +21,13 @@ describe("String Class Extra Methods", () => {
     expect('testing'.toLower()).toEqual("testing");
     expect('tsTing'.toLower()).toEqual("tsting");
     expect('JINGLE'.toLower()).toEqual("jingle");
-    expect('jiNgl55E'.toUpper()).toEqual("jingl55e");
+    expect('jiNgl55E'.toLower()).toEqual("jingl55e");
   });
   // ucFirst (typeof String): Returns the String in question but changes the First Character to an Upper case. Make use of your toUpper method above to implement this method or a one-liner.
   it("Should return string with first character in uppercase", () => {
-    expect('Testing'.ucFirst()).toEqual("TESTING");
-    expect('tsTing'.ucFirst()).toEqual("TSTING");
-    expect('jingle'.ucFirst()).toEqual("JINGLE");
+    expect('Testing'.ucFirst()).toEqual("Testing");
+    expect('tsTing'.ucFirst()).toEqual("TsTing");
+    expect('jingle'.ucFirst()).toEqual("Jingle");
   });
   // isQuestion (typeof Boolean): Return true if the string is a question (ending with a question mark). This method must implement Regular Expression.
   it("Should return true if a string is a question", () => {
@@ -49,6 +49,7 @@ describe("String Class Extra Methods", () => {
     expect('Testing of the properties '.wordCount()).toEqual(4);
     expect('tsTing of the world is'.wordCount()).toEqual(5);
     expect('JINGLe'.wordCount()).toEqual(1);
+    expect(typeof('tsing is the world'.wordCount())).toEqual('number')
   });
   // toCurrency (typeof String): Returns a currency representation of the String e.g 11111.11 should be represented as 11,111.11.
   it("Should return a currency representation of the String", () => {
@@ -58,27 +59,28 @@ describe("String Class Extra Methods", () => {
   });
   // fromCurrency (typeof Number): Returns a number representation of the Currency String e.g 11,111.11 should return 11111.11
   it("Should return a string representation of the inputed currency", () => {
-    expect('111,111.11'.fromCurrency()).toEqual('111111.11');
-    expect('100,255,452,875.23'.fromCurrency()).toEqual('100255452875.23');
-    expect('5,006,254.00'.fromCurrency()).toEqual('5006254.00');
-    expect('5,006,254.00'.fromCurrency()).toEqual('5006254.00');
+    expect('111,111.11'.fromCurrency()).toEqual(111111.11);
+    expect('100,255,452,875.23'.fromCurrency()).toEqual(100255452875.23);
+    expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
+    expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
+    expect(typeof('3,555,33.00'.fromCurrency())).toEqual('number');
   });
   // inverseCase (typeof String): Returns each letter in the string as an inverse of its current case e.g Mr. Ben should return mR. bEN.
   it("Should return each letter in the string as an inverse of its current case", () => {
     expect('HALLELUYAH'.inverseCase()).toEqual('halleluyah');
     expect('halleluyah'.inverseCase()).toEqual('HALLELUYAH');
     expect('halleLUYah'.inverseCase()).toEqual('HALLEluyAH');
-    expect('5,006,254.00'.inverseCase()).toEqual('5006254.00');
+    expect('5,006,gfhYY254.00'.inverseCase()).toEqual('5,006,GFHyy254.00');
   });
   // alternatingCase (typeof String): Returns the letters in alternating cases. It must start with a lower case e.g Onomatopoeia should return oNoMaToPoEiA.
-  it("Should return each letter in the string as an inverse of its current case", () => {
+  it("Should return the letters in alternating case", () => {
     expect('HALLELUYAH'.alternatingCase()).toEqual('hAlLeLuYaH');
     expect('halleluyah'.alternatingCase()).toEqual('hAlLeLuYaH');
     expect('halleLUYah'.alternatingCase()).toEqual('hAlLeLuYaH');
     expect('5,006,254.00'.alternatingCase()).toEqual('Invalid String');
   });
   // getMiddle (typeof String): Returns the character(s) in the middle of the string e.g read should return ea and reads should return a.
-  it("Should return each letter in the string as an inverse of its current case", () => {
+  it("Should return the character(s) in the middle of the string", () => {
     expect('HALLELUYAH'.getMiddle()).toEqual('EL');
     expect('halleluyahs'.getMiddle()).toEqual('l');
     expect('halleLUYah'.getMiddle()).toEqual('eL');
