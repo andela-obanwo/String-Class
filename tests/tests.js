@@ -1,3 +1,4 @@
+/* eslint-disable no-undef*/
 describe('String Class Extra Methods', () => {
   it('Should return True if the string contains vowels', () => {
     expect('Testing'.hasVowels()).toEqual(true);
