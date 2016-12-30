@@ -93,6 +93,7 @@ describe('String Class Extra Methods', () => {
     expect('3'.isDigit()).toEqual(true);
     expect('54'.isDigit()).toEqual(false);
     expect('0'.isDigit()).toEqual(true);
+    expect('TEST'.isDigit()).toEqual(false);
   });
 
   it('Should return true if a string contains double characters', () => {

@@ -183,13 +183,11 @@ const extendStringClass = {
  * @return {Boolean}
  */
   isDigit() {
-    if (/\d?/.test(this)) {
-      if (this.length > 1) {
-        return false;
-      } else {
+    if (/\d?/.test(this) && this.length === 1 ) {
         return true;
+      } else {
+        return false;
       }
-    }
   },
   /**
    * Returns true if a string contains double characters
