@@ -3,6 +3,7 @@ describe('String Class Extra Methods', () => {
   it('Should return True if the string contains vowels', () => {
     expect('Testing'.hasVowels()).toEqual(true);
     expect('tstng'.hasVowels()).toEqual(false);
+    expect('tstIng'.hasVowels()).toEqual(true);
   });
 
   it('Should return uppercase string for all passed in data', () => {
@@ -51,6 +52,7 @@ describe('String Class Extra Methods', () => {
     expect('111111.11'.toCurrency()).toEqual('111,111.11');
     expect('100255452875.23'.toCurrency()).toEqual('100,255,452,875.23');
     expect('5006254'.toCurrency()).toEqual('5,006,254.00');
+    expect('hello ore'.toCurrency()).toEqual('Invalid String');
   });
 
   it('Should return a string representation of the inputed currency', () => {
@@ -59,6 +61,7 @@ describe('String Class Extra Methods', () => {
     expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
     expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
     expect(typeof ('3,555,33.00'.fromCurrency())).toEqual('number');
+    expect('4,455,O00'.fromCurrency()).toEqual('Invalid String');
   });
 
   it('Should return each letter as an inverse of its current case', () => {

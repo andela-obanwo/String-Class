@@ -6,7 +6,7 @@ const extendStringClass = {
    */
 
   hasVowels() {
-    return /[aeiou]/.test(this);
+    return /[aeiou]/i.test(this);
   },
 
   /**
@@ -71,6 +71,9 @@ const extendStringClass = {
    */
 
   toCurrency() {
+    if (this.match(/[^\d.]/)) {
+      return 'Invalid String';
+    }
     if (/\.\d\d$/.test(this)) {
       return this.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
     }
@@ -84,6 +87,9 @@ const extendStringClass = {
    */
 
   fromCurrency() {
+    if (this.match(/[^\d,.]/)) {
+      return 'Invalid String';
+    }
     return parseFloat(this.replace(/,/g, ''));
   },
   /**
