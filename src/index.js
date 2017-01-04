@@ -8,17 +8,23 @@ const extendStringClass = {
   hasVowels() {
     return /[aeiou]/i.test(this);
   },
+  /**
+   * Returns an Array of the upper and lower case alphabets.
+   * @return {Array}
+   */
 
+  characters() {
+    return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    .split('');
+  },
   /**
    * Returns the String in question but with all characters in upper case.
    * @return {String}
    */
 
   toUpper() {
-    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const charactersar = characters.split('');
     return this.replace(/[a-z]/g, m =>
-      charactersar[charactersar.indexOf(m) + 26]
+      ''.characters()[''.characters().indexOf(m) + 26]
     );
   },
 
@@ -28,10 +34,8 @@ const extendStringClass = {
    */
 
   toLower() {
-    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const charactersar = characters.split('');
     return this.replace(/[A-Z]/g, m =>
-      charactersar[charactersar.indexOf(m) - 26]);
+      ''.characters()[''.characters().indexOf(m) - 26]);
   },
   /**
    * Returns the String in question but with the first characters in upper case.
@@ -71,14 +75,10 @@ const extendStringClass = {
    */
 
   toCurrency() {
-    if (this.match(/[^\d.]/)) {
+    if (/[^\d.]/.test(this) || /\..*\./.test(this)) {
       return 'Invalid String';
     }
-    if (/\.\d\d$/.test(this)) {
-      return this.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
-    }
-    const thiss = `${this}.00`;
-    return thiss.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+    return Number(this).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
   },
 
   /**
@@ -175,10 +175,9 @@ const extendStringClass = {
       0: 'zero'
     };
     let count = 1;
-    const thiss = this;
     return this.replace(/[0-9]/g, (m) => {
-      if (thiss.length > 1) {
-        if (count === thiss.length) {
+      if (this.length > 1) {
+        if (count === this.length) {
           return `${matchTable[m]}`;
         }
         count += 1;

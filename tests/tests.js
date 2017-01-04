@@ -53,6 +53,9 @@ describe('String Class Extra Methods', () => {
     expect('100255452875.23'.toCurrency()).toEqual('100,255,452,875.23');
     expect('5006254'.toCurrency()).toEqual('5,006,254.00');
     expect('hello ore'.toCurrency()).toEqual('Invalid String');
+    expect('7767676..45'.toCurrency()).toEqual('Invalid String');
+    expect('7767676.66.45'.toCurrency()).toEqual('Invalid String');
+    expect('7767676,6645'.toCurrency()).toEqual('Invalid String');
   });
 
   it('Should return a string representation of the inputed currency', () => {
