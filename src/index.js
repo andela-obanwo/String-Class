@@ -51,7 +51,7 @@ const extendStringClass = {
    */
 
   isQuestion() {
-    return /\?$/.test(this);
+    return /^[^?]+\?$/.test(this);
   },
   /**
    * Returns a list of the words in the string
@@ -98,12 +98,15 @@ const extendStringClass = {
    */
 
   inverseCase() {
-    return this.replace(/[a-zA-Z]/g, (m) => {
-      if (/[a-z]/.test(m)) {
-        return m.toUpper();
-      }
-      return m.toLower();
-    });
+    if (/[a-zA-Z]/.test(this)) {
+      return this.replace(/[a-zA-Z]/g, (m) => {
+        if (/[a-z]/.test(m)) {
+          return m.toUpper();
+        }
+        return m.toLower();
+      });
+    }
+    return 'Invalid String';
   },
   /**
    * Returns the letters in alternating case

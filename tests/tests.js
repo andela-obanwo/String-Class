@@ -1,112 +1,254 @@
 /* eslint-disable no-undef*/
 describe('String Class Extra Methods', () => {
-  it('Should return True if the string contains vowels', () => {
-    expect('Testing'.hasVowels()).toEqual(true);
-    expect('tstng'.hasVowels()).toEqual(false);
-    expect('tstIng'.hasVowels()).toEqual(true);
+  describe('hasVowels', () => {
+    const actuals = {
+      hasVowels1: 'Testing',
+      hasVowels2: 'tstIng',
+      hasVowels3: 'tstng'
+    };
+    it('Should return True if the string contains vowels', () => {
+      expect(actuals.hasVowels1.hasVowels()).toBeTruthy();
+      expect(actuals.hasVowels2.hasVowels()).toBeTruthy();
+    });
+    it('Should return False if the string does not contain vowels', () => {
+      expect(actuals.hasVowels3.hasVowels()).toBeFalsy();
+    });
   });
-
-  it('Should return uppercase string for all passed in data', () => {
-    expect('Testing'.toUpper()).toEqual('TESTING');
-    expect('tsTing'.toUpper()).toEqual('TSTING');
-    expect('JINGLE'.toUpper()).toEqual('JINGLE');
-    expect('jingl55E'.toUpper()).toEqual('JINGL55E');
+  describe('toUpper', () => {
+    const actuals = {
+      toUpper1: 'Testing',
+      toUpper2: 'tsTing',
+      toUpper3: 'JINGLE',
+      toUpper4: 'jingl55E'
+    };
+    it('Should return uppercase string for all passed in data', () => {
+      expect(actuals.toUpper1.toUpper()).toEqual('TESTING');
+      expect(actuals.toUpper2.toUpper()).toEqual('TSTING');
+      expect(actuals.toUpper3.toUpper()).toEqual('JINGLE');
+      expect(actuals.toUpper4.toUpper()).toEqual('JINGL55E');
+    });
   });
-
-  it('Should return lowercase string for all passed in strings', () => {
-    expect('testing'.toLower()).toEqual('testing');
-    expect('tsTing'.toLower()).toEqual('tsting');
-    expect('JINGLE'.toLower()).toEqual('jingle');
-    expect('jiNgl55E'.toLower()).toEqual('jingl55e');
+  describe('toLower', () => {
+    const actuals = {
+      toLower1: 'Testing',
+      toLower2: 'tsTing',
+      toLower3: 'JINGLE',
+      toLower4: 'jingl55E'
+    };
+    it('Should return a lowercase string for all passed in strings', () => {
+      expect(actuals.toLower1.toLower()).toEqual('testing');
+      expect(actuals.toLower2.toLower()).toEqual('tsting');
+      expect(actuals.toLower3.toLower()).toEqual('jingle');
+      expect(actuals.toLower4.toLower()).toEqual('jingl55e');
+    });
   });
-
-  it('Should return string with first character in uppercase', () => {
-    expect('Testing'.ucFirst()).toEqual('Testing');
-    expect('tsTing'.ucFirst()).toEqual('TsTing');
-    expect('jingle'.ucFirst()).toEqual('Jingle');
+  describe('ucFirst', () => {
+    const actuals = {
+      ucFirst1: 'Testing',
+      ucFirst2: 'tsTing',
+      ucFirst3: 'jingle'
+    };
+    it('Should return string with first character in uppercase', () => {
+      expect(actuals.ucFirst1.ucFirst()).toEqual('Testing');
+      expect(actuals.ucFirst2.ucFirst()).toEqual('TsTing');
+      expect(actuals.ucFirst3.ucFirst()).toEqual('Jingle');
+    });
   });
-
-  it('Should return true if a string is a question', () => {
-    expect('Testing?'.isQuestion()).toEqual(true);
-    expect('tsTing isn\'t it?'.isQuestion()).toEqual(true);
-    expect('JINGLE'.isQuestion()).toEqual(false);
+  describe('isQuestion', () => {
+    const actuals = {
+      isQuestion1: 'Testing?',
+      isQuestion2: 'tsTing isn\'t it?',
+      isQuestion3: 'JINGLE',
+      isQuestion4: 'JING?le?'
+    };
+    it('Should return true if a string is a question', () => {
+      expect(actuals.isQuestion1.isQuestion()).toBeTruthy();
+      expect(actuals.isQuestion2.isQuestion()).toBeTruthy();
+    });
+    it('Should return false if a string is not a question', () => {
+      expect(actuals.isQuestion3.isQuestion()).toBeFalsy();
+      expect(actuals.isQuestion4.isQuestion()).toBeFalsy();
+    });
   });
-
-  const wordsResult1 = ['Testing', 'of', 'the', 'properties'];
-  const wordsResult2 = ['tsTing', 'of', 'the', 'world', 'is'];
-  const wordsResult3 = ['JINGLe'];
-  it('Should return an array of the words contained in inputed string.', () => {
-    expect('Testing of the properties '.words()).toEqual(wordsResult1);
-    expect('tsTing of the world is'.words()).toEqual(wordsResult2);
-    expect('JINGLe'.words()).toEqual(wordsResult3);
+  describe('words', () => {
+    const expected = {
+      words1: ['Testing', 'of', 'the', 'properties'],
+      words2: ['tsTing', 'of', 'the', 'world', 'is'],
+      words3: ['JINGLe']
+    };
+    const actuals = {
+      words1: 'Testing of the properties ',
+      words2: 'tsTing of the world is',
+      words3: 'JINGLe'
+    };
+    it('Should return array of words contained in inputed string.', () => {
+      expect(actuals.words1.words()).toEqual(expected.words1);
+      expect(actuals.words2.words()).toEqual(expected.words2);
+      expect(actuals.words3.words()).toEqual(expected.words3);
+    });
   });
-
-  it('Should return count of words contained in entered string', () => {
-    expect('Testing of the properties '.wordCount()).toEqual(4);
-    expect('tsTing of the world is'.wordCount()).toEqual(5);
-    expect('JINGLe'.wordCount()).toEqual(1);
-    expect(typeof ('tsing is the world'.wordCount())).toEqual('number');
+  describe('wordCount', () => {
+    const actuals = {
+      wordCount1: 'Testing of the properties ',
+      wordCount2: 'tsTing of the world is',
+      wordCount3: 'JINGLe'
+    };
+    it('Should return count of words contained in entered string', () => {
+      expect(actuals.wordCount1.wordCount()).toEqual(4);
+      expect(actuals.wordCount2.wordCount()).toEqual(5);
+      expect(actuals.wordCount3.wordCount()).toEqual(1);
+    });
+    it('Should return \'number\' as data type for returned string', () => {
+      expect(typeof (actuals.wordCount1.wordCount())).toEqual('number');
+    });
   });
-
-  it('Should return a currency representation of the String', () => {
-    expect('111111.11'.toCurrency()).toEqual('111,111.11');
-    expect('100255452875.23'.toCurrency()).toEqual('100,255,452,875.23');
-    expect('5006254'.toCurrency()).toEqual('5,006,254.00');
-    expect('hello ore'.toCurrency()).toEqual('Invalid String');
-    expect('7767676..45'.toCurrency()).toEqual('Invalid String');
-    expect('7767676.66.45'.toCurrency()).toEqual('Invalid String');
-    expect('7767676,6645'.toCurrency()).toEqual('Invalid String');
+  describe('toCurrency', () => {
+    const actuals = {
+      toCurrency1: '111111.11',
+      toCurrency2: '100255452875.23',
+      toCurrency3: '100255452875.23456',
+      toCurrency4: '5006254',
+      toCurrency5: '5006254.',
+      toCurrency6: '5OO6254',
+      toCurrency7: '7767676..45',
+      toCurrency8: '7767676.66.45',
+      toCurrency9: '7767676,6645'
+    };
+    it('Should return a currency representation of the String', () => {
+      expect(actuals.toCurrency1.toCurrency()).toEqual('111,111.11');
+      expect(actuals.toCurrency2.toCurrency()).toEqual('100,255,452,875.23');
+      expect(actuals.toCurrency3.toCurrency()).toEqual('100,255,452,875.23');
+      expect(actuals.toCurrency4.toCurrency()).toEqual('5,006,254.00');
+      expect(actuals.toCurrency5.toCurrency()).toEqual('5,006,254.00');
+    });
+    it('Should return Invalid String for Bad numbers', () => {
+      expect(actuals.toCurrency6.toCurrency()).toEqual('Invalid String');
+      expect(actuals.toCurrency7.toCurrency()).toEqual('Invalid String');
+      expect(actuals.toCurrency8.toCurrency()).toEqual('Invalid String');
+      expect(actuals.toCurrency9.toCurrency()).toEqual('Invalid String');
+    });
   });
-
-  it('Should return a string representation of the inputed currency', () => {
-    expect('111,111.11'.fromCurrency()).toEqual(111111.11);
-    expect('100,255,452,875.23'.fromCurrency()).toEqual(100255452875.23);
-    expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
-    expect('5,006,254.00'.fromCurrency()).toEqual(5006254.00);
-    expect(typeof ('3,555,33.00'.fromCurrency())).toEqual('number');
-    expect('4,455,O00'.fromCurrency()).toEqual('Invalid String');
+  describe('fromCurrency', () => {
+    const actuals = {
+      fromCurrency1: '111,111.11',
+      fromCurrency2: '100,255,452,875.23',
+      fromCurrency3: '5,006,254.00',
+      fromCurrency4: '5,006,254',
+      fromCurrency5: '4,455,O00'
+    };
+    it('Should return a string representation of the inputed currency', () => {
+      expect(actuals.fromCurrency1.fromCurrency()).toEqual(111111.11);
+      expect(actuals.fromCurrency2.fromCurrency()).toEqual(100255452875.23);
+      expect(actuals.fromCurrency3.fromCurrency()).toEqual(5006254.00);
+      expect(actuals.fromCurrency4.fromCurrency()).toEqual(5006254);
+    });
+    it('Should confirm that data type of result is \'number\'', () => {
+      expect(typeof (actuals.fromCurrency4.fromCurrency())).toEqual('number');
+    });
+    it('Should return \'Invalid String\' for Bad currency data', () => {
+      expect(actuals.fromCurrency5.fromCurrency()).toEqual('Invalid String');
+    });
   });
-
-  it('Should return each letter as an inverse of its current case', () => {
-    expect('HALLELUYAH'.inverseCase()).toEqual('halleluyah');
-    expect('halleluyah'.inverseCase()).toEqual('HALLELUYAH');
-    expect('halleLUYah'.inverseCase()).toEqual('HALLEluyAH');
-    expect('5,006,gfhYY254.00'.inverseCase()).toEqual('5,006,GFHyy254.00');
+  describe('inverseCase', () => {
+    const actuals = {
+      inverseCase1: 'HALLELUYAH',
+      inverseCase2: 'halleluyah',
+      inverseCase3: 'halleLUYah',
+      inverseCase4: '5,006,gfhYY254.00',
+      inverseCase5: '5,006.00'
+    };
+    it('Should return each letter as an inverse of its current case', () => {
+      expect(actuals.inverseCase1.inverseCase()).toEqual('halleluyah');
+      expect(actuals.inverseCase2.inverseCase()).toEqual('HALLELUYAH');
+      expect(actuals.inverseCase3.inverseCase()).toEqual('HALLEluyAH');
+      expect(actuals.inverseCase4.inverseCase()).toEqual('5,006,GFHyy254.00');
+    });
+    it('Should return \'Invalid String\' for input with no alphabets', () => {
+      expect(actuals.inverseCase5.inverseCase()).toEqual('Invalid String');
+    });
   });
-
-  it('Should return the letters in alternating case', () => {
-    expect('HALLELUYAH'.alternatingCase()).toEqual('hAlLeLuYaH');
-    expect('halleluyah'.alternatingCase()).toEqual('hAlLeLuYaH');
-    expect('halleLUYah'.alternatingCase()).toEqual('hAlLeLuYaH');
-    expect('5,006,254.00'.alternatingCase()).toEqual('Invalid String');
+  describe('alternatingCase', () => {
+    const actuals = {
+      alternatingCase1: 'HALLELUYAH',
+      alternatingCase2: 'halleluyah',
+      alternatingCase3: 'halleLUYah',
+      alternatingCase4: '5,006,254.00',
+      alternatingCase5: 'Ore0lUwa'
+    };
+    it('Should return the letters in alternating case', () => {
+      expect(actuals.alternatingCase1.alternatingCase()).toEqual('hAlLeLuYaH');
+      expect(actuals.alternatingCase2.alternatingCase()).toEqual('hAlLeLuYaH');
+      expect(actuals.alternatingCase3.alternatingCase()).toEqual('hAlLeLuYaH');
+    });
+    it('Should return \'Invalid String\' for input with non-alphabets', () => {
+      expect(actuals.alternatingCase4.alternatingCase())
+      .toEqual('Invalid String');
+      expect(actuals.alternatingCase5.alternatingCase())
+      .toEqual('Invalid String');
+    });
   });
-
-  it('Should return the character(s) in the middle of the string', () => {
-    expect('HALLELUYAH'.getMiddle()).toEqual('EL');
-    expect('halleluyahs'.getMiddle()).toEqual('l');
-    expect('halleLUYah'.getMiddle()).toEqual('eL');
-    expect('5,006,254.00'.getMiddle()).toEqual(',2');
+  describe('getMiddle', () => {
+    const actuals = {
+      getMiddle1: 'HALLELUYAH',
+      getMiddle2: 'halleluyahs',
+      getMiddle3: 'halleLUYah',
+      getMiddle4: '5,006,254.00'
+    };
+    it('Should return the character(s) in the middle of the string', () => {
+      expect(actuals.getMiddle1.getMiddle()).toEqual('EL');
+      expect(actuals.getMiddle2.getMiddle()).toEqual('l');
+      expect(actuals.getMiddle3.getMiddle()).toEqual('eL');
+      expect(actuals.getMiddle4.getMiddle()).toEqual(',2');
+    });
   });
-
-  it('Should return the numbers in words', () => {
-    expect('HALLELUYAH'.numberWords()).toEqual('Invalid String');
-    expect('3'.numberWords()).toEqual('three');
-    expect('54'.numberWords()).toEqual('five four');
-    expect('000'.numberWords()).toEqual('zero zero zero');
+  describe('numberWords', () => {
+    const actuals = {
+      numberWords1: '3',
+      numberWords2: '54',
+      numberWords3: '000',
+      numberWords4: 'HALLELUYAH',
+      numberWords5: '00f0'
+    };
+    it('Should return the numbers in words', () => {
+      expect(actuals.numberWords1.numberWords()).toEqual('three');
+      expect(actuals.numberWords2.numberWords()).toEqual('five four');
+      expect(actuals.numberWords3.numberWords()).toEqual('zero zero zero');
+    });
+    it('Should return \'invalid String\' for non-number strings', () => {
+      expect(actuals.numberWords4.numberWords()).toEqual('Invalid String');
+      expect(actuals.numberWords5.numberWords()).toEqual('Invalid String');
+    });
   });
-
-  it('Should return true if the string is a single digit', () => {
-    expect('HALLELUYAH'.isDigit()).toEqual(false);
-    expect('3'.isDigit()).toEqual(true);
-    expect('54'.isDigit()).toEqual(false);
-    expect('0'.isDigit()).toEqual(true);
-    expect('TEST'.isDigit()).toEqual(false);
+  describe('isDigit', () => {
+    const actuals = {
+      isDigit1: '3',
+      isDigit2: '0',
+      isDigit3: '54',
+      isDigit4: 'TEST'
+    };
+    it('Should return true if the string is a single digit', () => {
+      expect(actuals.isDigit1.isDigit()).toBeTruthy();
+      expect(actuals.isDigit2.isDigit()).toBeTruthy();
+    });
+    it('Should return false if the string is not a single digit', () => {
+      expect(actuals.isDigit3.isDigit()).toBeFalsy();
+      expect(actuals.isDigit4.isDigit()).toBeFalsy();
+    });
   });
-
-  it('Should return true if a string contains double characters', () => {
-    expect('HALLELUYAH'.doubleCheck()).toEqual(true);
-    expect('3'.doubleCheck()).toEqual(false);
-    expect('5477'.doubleCheck()).toEqual(true);
-    expect('ore  banwo'.doubleCheck()).toEqual(true);
+  describe('doubleCheck', () => {
+    const actuals = {
+      doubleCheck1: 'HALLELUYAH',
+      doubleCheck2: '3',
+      doubleCheck3: '5477',
+      doubleCheck4: 'ore  banwo'
+    };
+    it('Should return true if a string contains double characters', () => {
+      expect(actuals.doubleCheck1.doubleCheck()).toBeTruthy();
+      expect(actuals.doubleCheck3.doubleCheck()).toBeTruthy();
+      expect(actuals.doubleCheck4.doubleCheck()).toBeTruthy();
+    });
+    it('Should return false if no double characters in string', () => {
+      expect(actuals.doubleCheck2.doubleCheck()).toBeFalsy();
+    });
   });
 });
