@@ -55,3 +55,12 @@
 
 * **doubleCheck _(typeof Boolean):_**
   Returns true if a string contains double characters(including whitespace character) e.g aa, !!, should return true.
+
+## Technologies Used
+* Javascript (ES6)
+* Jasmine
+* Karma
+* Node.js
+
+## Limitations
+This app does not run in a Web browser.
