@@ -85,8 +85,8 @@ const extendStringClass = {
    * @return {Number} fromCurrency
    */
   fromCurrency() {
-    if (this.match(/[^\d,.]/) ||
-    !(this.match(/(\d{1,3},)(?=(\d{3})+\.\d{2}$)/g))) {
+    if (/[^\d,.]/.test(this) ||
+    !((/(\d{1,3},)(?=(\d{3})+\.\d{2}$)/g).test(this))) {
       throw Error;
     } else {
       return parseFloat(this.replace(/,/g, ''));
