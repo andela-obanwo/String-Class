@@ -1,170 +1,152 @@
 
 const extendStringClass = {
+
   /**
    * Returns true if the string contains vowels.
-   * @return {Boolean}
+   * @return {Boolean} hasVowels
    */
-
   hasVowels() {
     return /[aeiou]/i.test(this);
   },
+
   /**
    * Returns an Array of the upper and lower case alphabets.
-   * @return {Array}
+   * @return {Array} characters
    */
-
   characters() {
     return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    .split('');
+      .split('');
   },
+
   /**
    * Returns the String in question but with all characters in upper case.
-   * @return {String}
+   * @return {String} toUpper
    */
-
   toUpper() {
-    return this.replace(/[a-z]/g, m =>
-      ''.characters()[''.characters().indexOf(m) + 26]
+    return this.replace(/[a-z]/g, char =>
+      ''.characters()[''.characters().indexOf(char) + 26]
     );
   },
 
   /**
    * Returns the String in question but with all characters in lower case.
-   * @return {String}
+   * @return {String} toLower
    */
-
   toLower() {
-    return this.replace(/[A-Z]/g, m =>
-      ''.characters()[''.characters().indexOf(m) - 26]);
+    return this.replace(/[A-Z]/g, char =>
+      ''.characters()[''.characters().indexOf(char) - 26]);
   },
+
   /**
    * Returns the String in question but with the first characters in upper case.
-   * @return {String}
+   * @return {String} ucFirst
    */
-
   ucFirst() {
-    return this.replace(/[A-Z]/i, m => m.toUpper());
+    return this.replace(/[A-Z]/i, char => char.toUpper());
   },
+
   /**
    * Return true if the string is a question.
-   * @return {String}
+   * @return {String} isQuestion
    */
-
   isQuestion() {
-    return /^[^?]+\?$/.test(this);
+    return /^\w+[^?]*\?$/.test(this);
   },
+
   /**
    * Returns a list of the words in the string
-   * @return {String};
+   * @return {String} words
    */
-
   words() {
     return this.match(/\w+/g);
   },
+
   /**
    * Returns the number of words in the string
-   * @return {Number}
+   * @return {Number} wordCount
    */
-
   wordCount() {
     return this.words().length;
   },
+
   /**
    * Returns a currency representation of the String
-   * @return {String}
+   * @return {String} toCurrency
    */
-
   toCurrency() {
     if (/[^\d.]/.test(this) || /\..*\./.test(this)) {
-      return 'Invalid String';
+      throw Error;
     }
     return Number(this).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
   },
 
   /**
    * Returns a number representation of the Currency String
-   * @return {Number}
+   * @return {Number} fromCurrency
    */
-
   fromCurrency() {
-    if (this.match(/[^\d,.]/)) {
-      return 'Invalid String';
+    if (/[^\d,.]/.test(this) ||
+    !((/(\d{1,3},)(?=(\d{3})+\.\d{2}$)/g).test(this))) {
+      throw Error;
+    } else {
+      return parseFloat(this.replace(/,/g, ''));
     }
-    return parseFloat(this.replace(/,/g, ''));
   },
+
   /**
    * Returns each letter as an inverse of its current case
-   * @return {String}
+   * @return {String} inverseCase
    */
-
   inverseCase() {
-    if (/[a-zA-Z]/.test(this)) {
-      return this.replace(/[a-zA-Z]/g, (m) => {
-        if (/[a-z]/.test(m)) {
-          return m.toUpper();
-        }
-        return m.toLower();
-      });
-    }
-    return 'Invalid String';
+    return this.replace(/[a-z]/ig, (char) => {
+      if (/[a-z]/.test(char)) {
+        return char.toUpper();
+      }
+      return char.toLower();
+    });
   },
+
   /**
    * Returns the letters in alternating case
-   * @return {String}
+   * @return {String} alternatingCase
    */
-
   alternatingCase() {
-    if (/[^a-zA-Z]/.test(this)) {
-      return 'Invalid String';
-    }
     let lower = true;
-    return this.replace(/[a-zA-Z]/g, (m) => {
+    return this.replace(/[a-z]/ig, (char) => {
       if (lower) {
         lower = !lower;
-        return m.toLower();
+        return char.toLower();
       }
       lower = !lower;
-      return m.toUpper();
+      return char.toUpper();
     });
   },
+
   /**
    * Returns the character(s) in the middle of the string
-   * @return {String}
+   * @return {String} getMiddle
    */
-
   getMiddle() {
-    if (this.length % 2 === 0) {
-      const middle = [this.length / 2, (this.length / 2) - 1];
-      let count = 0;
-      return this.replace(/./g, (m) => {
-        if (count === middle[0] || count === middle[1]) {
-          count += 1;
-          return m;
-        }
-        count += 1;
-        return '';
-      });
+    const length = this.length;
+    const halfLength = length / 2;
+    if (length % 2 === 0) {
+      const middle = [halfLength, halfLength - 1];
+      return this.replace(/./g, (char, count) =>
+        (count === middle[0] || count === middle[1] ?
+        char : '')
+      );
     }
-    const middle = Math.floor(this.length / 2);
-    let count = 0;
-    return this.replace(/./g, (m) => {
-      if (count === middle) {
-        count += 1;
-        return m;
-      }
-      count += 1;
-      return '';
-    });
+    const middle = Math.floor(halfLength);
+    return this.replace(/./g, (char, count) =>
+      (count === middle ? char : '')
+    );
   },
+
   /**
    * Returns the numbers in words
-   * @return {String}
+   * @return {String} numberWords
    */
-
   numberWords() {
-    if (/[a-zA-Z]/.test(this)) {
-      return 'Invalid String';
-    }
     const matchTable = {
       1: 'one',
       2: 'two',
@@ -177,35 +159,25 @@ const extendStringClass = {
       9: 'nine',
       0: 'zero'
     };
-    let count = 1;
-    return this.replace(/[0-9]/g, (m) => {
-      if (this.length > 1) {
-        if (count === this.length) {
-          return `${matchTable[m]}`;
-        }
-        count += 1;
-        return `${matchTable[m]} `;
-      }
-      return matchTable[m];
-    });
+    const length = this.length;
+    return this.replace(/[0-9]/g, (char, count) =>
+      (length === 1 || count === length - 1 ?
+        matchTable[char] : `${matchTable[char]} `)
+    );
   },
 
-/**
- * Returns true if the string is a digit
- * @return {Boolean}
- */
-
+  /**
+   * Returns true if the string is a digit
+   * @return {Boolean} isDigit
+   */
   isDigit() {
-    if (/\d?/.test(this) && this.length === 1) {
-      return true;
-    }
-    return false;
+    return /\d?/.test(this) && this.length === 1;
   },
+
   /**
    * Returns true if a string contains double characters
-   * @return {Boolean}
+   * @return {Boolean} doubleCheck
    */
-
   doubleCheck() {
     return /(.)\1/g.test(this);
   }
