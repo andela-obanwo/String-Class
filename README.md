@@ -6,8 +6,11 @@
 # String-Class
 ### Extends 'String' Class via prototype oriented programming
 
-## Installation and Usage
+## Installation, Tests and Usage
 * Download the zip file for or clone this repository
+* cd String-Class
+* run 'npm install' to install required packages
+* run 'npm test' to run tests
 * Require 'src/index.js' in your code and call the methods as required
 
 ## Methods
