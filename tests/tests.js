@@ -59,7 +59,8 @@ describe('String Class Extra Methods', () => {
       isQuestion1: 'Testing?',
       isQuestion2: 'tsTing isn\'t it?',
       isQuestion3: 'JINGLE',
-      isQuestion4: 'JING?le?'
+      isQuestion4: 'JING?le?',
+      isQuestion5: '-!,.?'
     };
     it('Should return true if a string is a question', () => {
       expect(actuals.isQuestion1.isQuestion()).toBeTruthy();
@@ -68,23 +69,35 @@ describe('String Class Extra Methods', () => {
     it('Should return false if a string is not a question', () => {
       expect(actuals.isQuestion3.isQuestion()).toBeFalsy();
       expect(actuals.isQuestion4.isQuestion()).toBeFalsy();
+      expect(actuals.isQuestion5.isQuestion()).toBeFalsy();
     });
   });
   describe('words', () => {
     const expected = {
       words1: ['Testing', 'of', 'the', 'properties'],
       words2: ['tsTing', 'of', 'the', 'world', 'is'],
-      words3: ['JINGLe']
+      words3: ['JINGLe'],
+      words4: ['Jingle',
+               'Why',
+               'would',
+               'tammy',
+               'timmy',
+               'tola',
+               'zest',
+               'be',
+               'disobedient']
     };
     const actuals = {
       words1: 'Testing of the properties ',
       words2: 'tsTing of the world is',
-      words3: 'JINGLe'
+      words3: 'JINGLe',
+      words4: 'Jingle! Why would tammy, timmy & tola-zest be disobedient?'
     };
     it('Should return array of words contained in inputed string.', () => {
       expect(actuals.words1.words()).toEqual(expected.words1);
       expect(actuals.words2.words()).toEqual(expected.words2);
       expect(actuals.words3.words()).toEqual(expected.words3);
+      expect(actuals.words4.words()).toEqual(expected.words4);
     });
   });
   describe('wordCount', () => {
@@ -121,11 +134,12 @@ describe('String Class Extra Methods', () => {
       expect(actuals.toCurrency4.toCurrency()).toEqual('5,006,254.00');
       expect(actuals.toCurrency5.toCurrency()).toEqual('5,006,254.00');
     });
-    it('Should return Invalid String for Bad numbers', () => {
-      expect(actuals.toCurrency6.toCurrency()).toEqual('Invalid String');
-      expect(actuals.toCurrency7.toCurrency()).toEqual('Invalid String');
-      expect(actuals.toCurrency8.toCurrency()).toEqual('Invalid String');
-      expect(actuals.toCurrency9.toCurrency()).toEqual('Invalid String');
+    it('Should throw an Error for Bad numbers', () => {
+      
+      expect(actuals.toCurrency6.toCurrency).toThrow();
+      expect(actuals.toCurrency7.toCurrency).toThrow();
+      expect(actuals.toCurrency8.toCurrency).toThrow();
+      expect(actuals.toCurrency9.toCurrency).toThrow();
     });
   });
   describe('fromCurrency', () => {
@@ -134,19 +148,23 @@ describe('String Class Extra Methods', () => {
       fromCurrency2: '100,255,452,875.23',
       fromCurrency3: '5,006,254.00',
       fromCurrency4: '5,006,254',
-      fromCurrency5: '4,455,O00'
+      fromCurrency5: '4,455,O00',
+      fromCurrency6: '4,455,000.000',
+      fromCurrency7: '3,342,2333,233.00'
     };
     it('Should return a string representation of the inputed currency', () => {
       expect(actuals.fromCurrency1.fromCurrency()).toEqual(111111.11);
       expect(actuals.fromCurrency2.fromCurrency()).toEqual(100255452875.23);
       expect(actuals.fromCurrency3.fromCurrency()).toEqual(5006254.00);
-      expect(actuals.fromCurrency4.fromCurrency()).toEqual(5006254);
     });
     it('Should confirm that data type of result is \'number\'', () => {
-      expect(typeof (actuals.fromCurrency4.fromCurrency())).toEqual('number');
+      expect(typeof (actuals.fromCurrency3.fromCurrency())).toEqual('number');
     });
-    it('Should return \'Invalid String\' for Bad currency data', () => {
-      expect(actuals.fromCurrency5.fromCurrency()).toEqual('Invalid String');
+    it('Should throw an Error for Bad currency data', () => {
+      expect(actuals.fromCurrency4.fromCurrency).toThrow();
+      expect(actuals.fromCurrency5.fromCurrency).toThrow();
+      expect(actuals.fromCurrency6.fromCurrency).toThrow();
+      expect(actuals.fromCurrency7.fromCurrency).toThrow();
     });
   });
   describe('inverseCase', () => {
@@ -162,9 +180,7 @@ describe('String Class Extra Methods', () => {
       expect(actuals.inverseCase2.inverseCase()).toEqual('HALLELUYAH');
       expect(actuals.inverseCase3.inverseCase()).toEqual('HALLEluyAH');
       expect(actuals.inverseCase4.inverseCase()).toEqual('5,006,GFHyy254.00');
-    });
-    it('Should return \'Invalid String\' for input with no alphabets', () => {
-      expect(actuals.inverseCase5.inverseCase()).toEqual('Invalid String');
+      expect(actuals.inverseCase5.inverseCase()).toEqual('5,006.00');
     });
   });
   describe('alternatingCase', () => {
@@ -179,13 +195,11 @@ describe('String Class Extra Methods', () => {
       expect(actuals.alternatingCase1.alternatingCase()).toEqual('hAlLeLuYaH');
       expect(actuals.alternatingCase2.alternatingCase()).toEqual('hAlLeLuYaH');
       expect(actuals.alternatingCase3.alternatingCase()).toEqual('hAlLeLuYaH');
-    });
-    it('Should return \'Invalid String\' for input with non-alphabets', () => {
       expect(actuals.alternatingCase4.alternatingCase())
-      .toEqual('Invalid String');
+      .toEqual('5,006,254.00');
       expect(actuals.alternatingCase5.alternatingCase())
-      .toEqual('Invalid String');
-    });
+      .toEqual('oRe0LuWa');
+      });
   });
   describe('getMiddle', () => {
     const actuals = {
@@ -213,10 +227,8 @@ describe('String Class Extra Methods', () => {
       expect(actuals.numberWords1.numberWords()).toEqual('three');
       expect(actuals.numberWords2.numberWords()).toEqual('five four');
       expect(actuals.numberWords3.numberWords()).toEqual('zero zero zero');
-    });
-    it('Should return \'invalid String\' for non-number strings', () => {
-      expect(actuals.numberWords4.numberWords()).toEqual('Invalid String');
-      expect(actuals.numberWords5.numberWords()).toEqual('Invalid String');
+      expect(actuals.numberWords4.numberWords()).toEqual('HALLELUYAH');
+      expect(actuals.numberWords5.numberWords()).toEqual('zero zero fzero');
     });
   });
   describe('isDigit', () => {
