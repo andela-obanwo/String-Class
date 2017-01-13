@@ -136,10 +136,14 @@ describe('String Class Extra Methods', () => {
       expect(actuals.trailingDecimalPt.toCurrency()).toEqual('5,006,254.00');
     });
     it('Should throw an Error for Bad numbers', () => {
-      expect(actuals.includesAlpha.toCurrency).toThrow();
-      expect(actuals.multiDecimalPtsJoined.toCurrency).toThrow();
-      expect(actuals.multiDecimalPtsSeparate.toCurrency).toThrow();
-      expect(actuals.includesComma.toCurrency).toThrow();
+      expect(actuals.includesAlpha.toCurrency)
+      .toThrowError('Invalid String');
+      expect(actuals.multiDecimalPtsJoined.toCurrency)
+      .toThrowError('Invalid String');
+      expect(actuals.multiDecimalPtsSeparate.toCurrency)
+      .toThrowError('Invalid String');
+      expect(actuals.includesComma.toCurrency)
+      .toThrowError('Invalid String');
     });
   });
   describe('fromCurrency', () => {
@@ -148,6 +152,7 @@ describe('String Class Extra Methods', () => {
       overAMillion: '100,255,452,875.23',
       zeroDecimalValue: '5,006,254.00',
       noDecimalPoint: '5,006,254',
+      oneDecimalPlace: '5,006,254.3',
       includesAlpha: '4,455,O00',
       threeDecimalPlaces: '4,455,000.000',
       wrongCommas: '3,342,2333,233.00'
@@ -156,16 +161,20 @@ describe('String Class Extra Methods', () => {
       expect(actuals.underAMillion.fromCurrency()).toEqual(111111.11);
       expect(actuals.overAMillion.fromCurrency()).toEqual(100255452875.23);
       expect(actuals.zeroDecimalValue.fromCurrency()).toEqual(5006254.00);
+      expect(actuals.noDecimalPoint.fromCurrency()).toEqual(5006254);
+      expect(actuals.oneDecimalPlace.fromCurrency()).toEqual(5006254.3);
     });
     it('Should confirm that data type of result is \'number\'', () => {
       expect(typeof (actuals.zeroDecimalValue.fromCurrency()))
       .toEqual('number');
     });
     it('Should throw an Error for Bad currency data', () => {
-      expect(actuals.noDecimalPoint.fromCurrency).toThrow();
-      expect(actuals.includesAlpha.fromCurrency).toThrow();
-      expect(actuals.threeDecimalPlaces.fromCurrency).toThrow();
-      expect(actuals.wrongCommas.fromCurrency).toThrow();
+      expect(actuals.includesAlpha.fromCurrency)
+      .toThrowError('Invalid String');
+      expect(actuals.threeDecimalPlaces.fromCurrency)
+      .toThrowError('Invalid String');
+      expect(actuals.wrongCommas.fromCurrency)
+      .toThrowError('Invalid String');
     });
   });
   describe('inverseCase', () => {
