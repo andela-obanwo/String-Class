@@ -13,6 +13,10 @@ describe('String Class Extra Methods', () => {
     it('Should return False if the string does not contain vowels', () => {
       expect(actuals.noVowels.hasVowels()).toBeFalsy();
     });
+    it('Should return \'boolean\' as data type for returned value', () => {
+      expect(typeof (actuals.upperCaseVowels.hasVowels())).toEqual('boolean');
+      expect(typeof (actuals.noVowels.hasVowels())).toEqual('boolean');
+    });
   });
   describe('toUpper', () => {
     const actuals = {
@@ -70,6 +74,10 @@ describe('String Class Extra Methods', () => {
       expect(actuals.noQuestionMark.isQuestion()).toBeFalsy();
       expect(actuals.multipleQuestionMark.isQuestion()).toBeFalsy();
       expect(actuals.nonWords.isQuestion()).toBeFalsy();
+    });
+    it('Should return \'boolean\' as data type for returned value', () => {
+      expect(typeof (actuals.question.isQuestion())).toEqual('boolean');
+      expect(typeof (actuals.nonWords.isQuestion())).toEqual('boolean');
     });
   });
   describe('words', () => {
@@ -257,6 +265,10 @@ describe('String Class Extra Methods', () => {
       expect(actuals.fiftyFour.isDigit()).toBeFalsy();
       expect(actuals.allAlpha.isDigit()).toBeFalsy();
     });
+    it('Should return \'boolean\' as data type for returned value', () => {
+      expect(typeof (actuals.zero.isDigit())).toEqual('boolean');
+      expect(typeof (actuals.allAlpha.isDigit())).toEqual('boolean');
+    });
   });
   describe('doubleCheck', () => {
     const actuals = {
@@ -272,6 +284,10 @@ describe('String Class Extra Methods', () => {
     });
     it('Should return false if no double characters in string', () => {
       expect(actuals.three.doubleCheck()).toBeFalsy();
+    });
+    it('Should return \'boolean\' as data type for returned value', () => {
+      expect(typeof (actuals.double7.doubleCheck())).toEqual('boolean');
+      expect(typeof (actuals.three.doubleCheck())).toEqual('boolean');
     });
   });
 });
